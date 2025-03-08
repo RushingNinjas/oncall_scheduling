@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinSci OnCall</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>SpinSci OnCall</h2>
+        </div>
+        <ul class="nav-links">
+            <li class="active" data-view="dashboard">
+                <i class="fas fa-home"></i> Dashboard
+            </li>
+            <li data-view="providers">
+                <i class="fas fa-user-md"></i> Providers
+            </li>
+            <li data-view="scheduling">
+                <i class="fas fa-calendar-alt"></i> Scheduling
+            </li>
+            <li data-view="on-call">
+                <i class="fas fa-phone"></i> On-Call
+            </li>
+            <li data-view="time-off">
+                <i class="fas fa-clock"></i> Time Off
+            </li>
+            <li data-view="reports">
+                <i class="fas fa-chart-bar"></i> Reports
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-menu">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </header>
+
+        <div class="container">
+            <div id="dashboard-view" class="view active">
+                <h1>Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Active Providers</h3>
+                        <p class="number">24</p>
+                        <p class="trend positive">↑ 2 this month</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>On Call Today</h3>
+                        <p class="number">8</p>
+                        <p>Next: Dr. Smith @ 6PM</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Pending Requests</h3>
+                        <p class="number">12</p>
+                        <button class="btn-primary">Review</button>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Coverage Gaps</h3>
+                        <p class="number">3</p>
+                        <button class="btn-warning">Resolve</button>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Add Provider</button>
+                    <button class="btn-secondary"><i class="fas fa-calendar-plus"></i> Schedule Shift</button>
+                    <button class="btn-secondary"><i class="fas fa-exchange-alt"></i> Swap Request</button>
+                </div>
+            </div>
+
+            <div id="providers-view" class="view">
+                <div class="section-header">
+                    <h1>Provider Directory</h1>
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Add Provider</button>
+                </div>
+                <div id="providers-list" class="providers-grid">
+                    <!-- Providers will be loaded here dynamically -->
+                </div>
+            </div>
+
+            <div id="scheduling-view" class="view">
+                <div class="section-header">
+                    <h1>Shift Scheduling</h1>
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Create Schedule</button>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>This Week's Schedule</h3>
+                        <div class="schedule-calendar">
+                            <ul id="schedule-list">
+                                <!-- Schedule data will be loaded here -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Pending Swaps</h3>
+                        <p class="number" id="pending-swaps-count">5</p>
+                        <button class="btn-secondary" id="review-requests-btn">Review Requests</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for reviewing requests -->
+            <div id="review-requests-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>Pending Swap Requests</h2>
+                    <ul id="swap-requests-list">
+                        <!-- Swap requests will be loaded here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div id="on-call-view" class="view">
+                <div class="section-header">
+                    <h1>On-Call Management</h1>
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Set On-Call</button>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Current On-Call</h3>
+                        <div class="on-call-list">
+                            <p><strong>Primary:</strong> Dr. Smith</p>
+                            <p><strong>Secondary:</strong> Dr. Johnson</p>
+                            <p><strong>Backup:</strong> Dr. Williams</p>
+                            <p><strong>Specialist:</strong> Dr. Emily Brown</p>
+                            <p><strong>Resident:</strong> Dr. Alex Green</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Next Rotation</h3>
+                        <p>Starts: Monday, 6:00 AM</p>
+                        <button class="btn-secondary" id="view-schedule-btn">View Schedule</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for viewing schedule -->
+            <div id="view-schedule-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn view-close-btn">&times;</span>
+                    <h2>On-Call Schedule</h2>
+                    <ul id="on-call-schedule-list">
+                        <!-- On-call schedule data will be loaded here -->
+                    </ul>
+                </div>
+            </div>
+
+            <div id="time-off-view" class="view">
+                <div class="section-header">
+                    <h1>Time Off Requests</h1>
+                    <button class="btn-primary"><i class="fas fa-plus"></i> Request Time Off</button>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Pending Requests</h3>
+                        <div class="time-off-list">
+                            <ul id="pending-requests-list">
+                                <!-- Pending requests will be loaded here -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Upcoming Time Off</h3>
+                        <div class="time-off-calendar">
+                            <ul id="upcoming-time-off-list">
+                                <!-- Upcoming time off will be loaded here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reports-view" class="view">
+                <div class="section-header">
+                    <h1>Analytics & Reports</h1>
+                    <button class="btn-primary"><i class="fas fa-download"></i> Export Data</button>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Provider Coverage</h3>
+                        <p id="provider-coverage">Loading data...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>On-Call Hours</h3>
+                        <p id="on-call-hours">Loading data...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Schedule Compliance</h3>
+                        <p id="schedule-compliance">Loading data...</p>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Time Off Trends</h3>
+                        <p id="time-off-trends">Loading data...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="create-schedule-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn create-close-btn">&times;</span>
+                    <h2>Create New Schedule</h2>
+                    <form id="create-schedule-form">
+                        <label for="day">Day:</label>
+                        <select id="day" name="day" required>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                        </select>
+                        <label for="shift">Shift:</label>
+                        <input type="text" id="shift" name="shift" placeholder="e.g., Dr. Jane Doe - 9 AM to 5 PM" required>
+                        <button type="submit" class="btn-primary">Add Shift</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="request-time-off-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn request-close-btn">&times;</span>
+                    <h2>Request Time Off</h2>
+                    <form id="request-time-off-form">
+                        <label for="provider-name">Provider Name:</label>
+                        <input type="text" id="provider-name" name="provider-name" required>
+                        <label for="reason">Reason:</label>
+                        <input type="text" id="reason" name="reason" required>
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" id="start-date" name="start-date" required>
+                        <label for="end-date">End Date:</label>
+                        <input type="date" id="end-date" name="end-date" required>
+                        <button type="submit" class="btn-primary">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="edit-provider-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn edit-close-btn">&times;</span>
+                    <h2>Edit Provider</h2>
+                    <form id="edit-provider-form">
+                        <label for="edit-provider-name">Provider Name:</label>
+                        <input type="text" id="edit-provider-name" name="provider-name" required>
+                        <label for="edit-role">Role:</label>
+                        <input type="text" id="edit-role" name="role" required>
+                        <label for="edit-department">Department:</label>
+                        <input type="text" id="edit-department" name="department" required>
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="add-provider-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn add-close-btn">&times;</span>
+                    <h2>Add Provider</h2>
+                    <form id="add-provider-form">
+                        <label for="add-provider-name">Provider Name:</label>
+                        <input type="text" id="add-provider-name" name="provider-name" required>
+                        <label for="add-role">Role:</label>
+                        <input type="text" id="add-role" name="role" required>
+                        <label for="add-department">Department:</label>
+                        <input type="text" id="add-department" name="department" required>
+                        <button type="submit" class="btn-primary">Add Provider</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="set-on-call-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn set-close-btn">&times;</span>
+                    <h2>Set On-Call Schedule</h2>
+                    <form id="set-on-call-form">
+                        <label for="primary">Primary:</label>
+                        <input type="text" id="primary" name="primary" required>
+                        <label for="secondary">Secondary:</label>
+                        <input type="text" id="secondary" name="secondary" required>
+                        <label for="backup">Backup:</label>
+                        <input type="text" id="backup" name="backup" required>
+                        <label for="specialist">Specialist:</label>
+                        <input type="text" id="specialist" name="specialist" required>
+                        <label for="resident">Resident:</label>
+                        <input type="text" id="resident" name="resident" required>
+                        <button type="submit" class="btn-primary">Save Schedule</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation handling
+        document.querySelectorAll('.nav-links li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+                item.classList.add('active');
+                
+                document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+                document.getElementById(`${item.dataset.view}-view`)?.classList.add('active');
+            });
+        });
+
+        // Updated providers loading code
+        fetch('/api/providers')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data received:', data); // For debugging
+                const providersList = document.getElementById('providers-list');
+                const providers = data; // Directly use the data as it's already an array
+                
+                if (Array.isArray(providers)) {
+                    providers.forEach(provider => {
+                        const providerCard = document.createElement('div');
+                        providerCard.className = 'provider-card';
+                        providerCard.innerHTML = `
+                            <div class="card-header">
+                                <h2>${provider.name}</h2>
+                                <div class="card-actions">
+                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon"><i class="fas fa-calendar-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Role:</strong> ${provider.role}</p>
+                                <p><strong>Department:</strong> ${provider.department}</p>
+                                <p><strong>Specialties:</strong> ${provider.specialties.join(', ')}</p>
+                                <p><strong>Certifications:</strong> ${provider.certifications.join(', ')}</p>
+                                <p><strong>Available:</strong> ${provider.availability.join(', ')}</p>
+                            </div>
+                        `;
+                        providersList.appendChild(providerCard);
+                    });
+                } else {
+                    console.error('Providers is not an array:', providers);
+                    providersList.innerHTML = '<p class="error">Error: Invalid data format</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const providersList = document.getElementById('providers-list');
+                providersList.innerHTML = '<p class="error">Error loading providers. Please try again later.</p>';
+            });
+
+        // Load schedule data
+        const scheduleData = [
+            { day: "Monday", shift: "Dr. John Smith - 8 AM to 4 PM" },
+            { day: "Tuesday", shift: "Dr. Sarah Johnson - 8 AM to 4 PM" },
+            { day: "Wednesday", shift: "Dr. Michael Chen - 8 AM to 4 PM" },
+            { day: "Thursday", shift: "Dr. Emily Rodriguez - 8 AM to 4 PM" },
+            { day: "Friday", shift: "Dr. David Kim - 8 AM to 4 PM" }
+        ];
+
+        const scheduleList = document.getElementById('schedule-list');
+        scheduleData.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.day}: ${item.shift}`;
+            scheduleList.appendChild(li);
+        });
+
+        // Handle review requests modal
+        const reviewRequestsBtn = document.getElementById('review-requests-btn');
+        const reviewRequestsModal = document.getElementById('review-requests-modal');
+        const closeBtn = document.querySelector('.close-btn');
+        const swapRequestsList = document.getElementById('swap-requests-list');
+
+        const swapRequests = [
+            "Dr. John Smith requests to swap with Dr. Sarah Johnson",
+            "Dr. Emily Rodriguez requests to swap with Dr. Michael Chen"
+        ];
+
+        swapRequests.forEach(request => {
+            const li = document.createElement('li');
+            li.textContent = request;
+            swapRequestsList.appendChild(li);
+        });
+
+        reviewRequestsBtn.onclick = function() {
+            reviewRequestsModal.style.display = "block";
+        }
+
+        closeBtn.onclick = function() {
+            reviewRequestsModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == reviewRequestsModal) {
+                reviewRequestsModal.style.display = "none";
+            }
+        }
+
+        // Handle create schedule modal
+        const createScheduleBtn = document.querySelector('#scheduling-view .btn-primary');
+        const createScheduleModal = document.getElementById('create-schedule-modal');
+        const createCloseBtn = document.querySelector('.create-close-btn');
+        const createScheduleForm = document.getElementById('create-schedule-form');
+
+        createScheduleBtn.onclick = function() {
+            createScheduleModal.style.display = "block";
+        }
+
+        createCloseBtn.onclick = function() {
+            createScheduleModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == createScheduleModal) {
+                createScheduleModal.style.display = "none";
+            }
+        }
+
+        createScheduleForm.onsubmit = function(event) {
+            event.preventDefault();
+            const day = document.getElementById('day').value;
+            const shift = document.getElementById('shift').value;
+            const newShift = `${day}: ${shift}`;
+
+            const li = document.createElement('li');
+            li.textContent = newShift;
+            scheduleList.appendChild(li);
+
+            createScheduleModal.style.display = "none";
+            createScheduleForm.reset();
+        }
+
+        // Handle view schedule modal
+        const viewScheduleBtn = document.getElementById('view-schedule-btn');
+        const viewScheduleModal = document.getElementById('view-schedule-modal');
+        const viewCloseBtn = document.querySelector('.view-close-btn');
+        const onCallScheduleList = document.getElementById('on-call-schedule-list');
+
+        const onCallScheduleData = [
+            "Monday: Dr. Smith (Primary), Dr. Johnson (Secondary)",
+            "Tuesday: Dr. Williams (Primary), Dr. Emily Brown (Specialist)",
+            "Wednesday: Dr. Alex Green (Resident), Dr. Smith (Backup)",
+            "Thursday: Dr. Johnson (Primary), Dr. Williams (Secondary)",
+            "Friday: Dr. Emily Brown (Specialist), Dr. Alex Green (Resident)"
+        ];
+
+        onCallScheduleData.forEach(schedule => {
+            const li = document.createElement('li');
+            li.textContent = schedule;
+            onCallScheduleList.appendChild(li);
+        });
+
+        viewScheduleBtn.onclick = function() {
+            viewScheduleModal.style.display = "block";
+        }
+
+        viewCloseBtn.onclick = function() {
+            viewScheduleModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == viewScheduleModal) {
+                viewScheduleModal.style.display = "none";
+            }
+        }
+
+        // Load time-off data
+        const pendingRequestsData = [
+            "Dr. John Smith - Vacation from 10/10 to 10/15",
+            "Dr. Sarah Johnson - Conference on 10/20",
+            "Dr. Emily Rodriguez - Personal Leave on 10/25"
+        ];
+
+        const upcomingTimeOffData = [
+            "Dr. Michael Chen - Vacation from 11/01 to 11/05",
+            "Dr. David Kim - Family Event on 11/10",
+            "Dr. Lisa Patel - Maternity Leave starting 11/15"
+        ];
+
+        const pendingRequestsList = document.getElementById('pending-requests-list');
+        pendingRequestsData.forEach(request => {
+            const li = document.createElement('li');
+            li.textContent = request;
+            pendingRequestsList.appendChild(li);
+        });
+
+        const upcomingTimeOffList = document.getElementById('upcoming-time-off-list');
+        upcomingTimeOffData.forEach(timeOff => {
+            const li = document.createElement('li');
+            li.textContent = timeOff;
+            upcomingTimeOffList.appendChild(li);
+        });
+
+        // Handle request time off modal
+        const requestTimeOffBtn = document.querySelector('#time-off-view .btn-primary');
+        const requestTimeOffModal = document.getElementById('request-time-off-modal');
+        const requestCloseBtn = document.querySelector('.request-close-btn');
+        const requestTimeOffForm = document.getElementById('request-time-off-form');
+
+        requestTimeOffBtn.onclick = function() {
+            requestTimeOffModal.style.display = "block";
+        }
+
+        requestCloseBtn.onclick = function() {
+            requestTimeOffModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == requestTimeOffModal) {
+                requestTimeOffModal.style.display = "none";
+            }
+        }
+
+        requestTimeOffForm.onsubmit = function(event) {
+            event.preventDefault();
+            const providerName = document.getElementById('provider-name').value;
+            const reason = document.getElementById('reason').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const newRequest = `${providerName} - ${reason} from ${startDate} to ${endDate}`;
+
+            const li = document.createElement('li');
+            li.textContent = newRequest;
+            pendingRequestsList.appendChild(li);
+
+            requestTimeOffModal.style.display = "none";
+            requestTimeOffForm.reset();
+        }
+
+        // Handle edit provider modal
+        const editProviderModal = document.getElementById('edit-provider-modal');
+        const editCloseBtn = document.querySelector('.edit-close-btn');
+        const editProviderForm = document.getElementById('edit-provider-form');
+        let currentProviderCard;
+
+        // Use event delegation for edit buttons
+        document.getElementById('providers-list').addEventListener('click', function(event) {
+            if (event.target.closest('.btn-icon')) {
+                currentProviderCard = event.target.closest('.provider-card');
+                const providerName = currentProviderCard.querySelector('h2').textContent;
+                const role = currentProviderCard.querySelector('p:nth-child(1)').textContent.split(': ')[1];
+                const department = currentProviderCard.querySelector('p:nth-child(2)').textContent.split(': ')[1];
+
+                document.getElementById('edit-provider-name').value = providerName;
+                document.getElementById('edit-role').value = role;
+                document.getElementById('edit-department').value = department;
+
+                editProviderModal.style.display = "block";
+            }
+        });
+
+        editCloseBtn.onclick = function() {
+            editProviderModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == editProviderModal) {
+                editProviderModal.style.display = "none";
+            }
+        }
+
+        editProviderForm.onsubmit = function(event) {
+            event.preventDefault();
+            const providerName = document.getElementById('edit-provider-name').value;
+            const role = document.getElementById('edit-role').value;
+            const department = document.getElementById('edit-department').value;
+
+            currentProviderCard.querySelector('h2').textContent = providerName;
+            currentProviderCard.querySelector('p:nth-child(1)').textContent = `Role: ${role}`;
+            currentProviderCard.querySelector('p:nth-child(2)').textContent = `Department: ${department}`;
+
+            editProviderModal.style.display = "none";
+        }
+
+        // Handle add provider modal
+        const addProviderBtn = document.querySelector('#providers-view .btn-primary');
+        const addProviderModal = document.getElementById('add-provider-modal');
+        const addCloseBtn = document.querySelector('.add-close-btn');
+        const addProviderForm = document.getElementById('add-provider-form');
+
+        addProviderBtn.onclick = function() {
+            addProviderModal.style.display = "block";
+        }
+
+        addCloseBtn.onclick = function() {
+            addProviderModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == addProviderModal) {
+                addProviderModal.style.display = "none";
+            }
+        }
+
+        addProviderForm.onsubmit = function(event) {
+            event.preventDefault();
+            const providerName = document.getElementById('add-provider-name').value;
+            const role = document.getElementById('add-role').value;
+            const department = document.getElementById('add-department').value;
+
+            const providerCard = document.createElement('div');
+            providerCard.className = 'provider-card';
+            providerCard.innerHTML = `
+                <div class="card-header">
+                    <h2>${providerName}</h2>
+                    <div class="card-actions">
+                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                        <button class="btn-icon"><i class="fas fa-calendar-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p><strong>Role:</strong> ${role}</p>
+                    <p><strong>Department:</strong> ${department}</p>
+                    <p><strong>Specialties:</strong> N/A</p>
+                    <p><strong>Certifications:</strong> N/A</p>
+                    <p><strong>Available:</strong> N/A</p>
+                </div>
+            `;
+            document.getElementById('providers-list').appendChild(providerCard);
+
+            addProviderModal.style.display = "none";
+            addProviderForm.reset();
+        }
+
+        // Handle set on-call modal
+        const setOnCallBtn = document.querySelector('#on-call-view .btn-primary');
+        const setOnCallModal = document.getElementById('set-on-call-modal');
+        const setCloseBtn = document.querySelector('.set-close-btn');
+        const setOnCallForm = document.getElementById('set-on-call-form');
+
+        setOnCallBtn.onclick = function() {
+            setOnCallModal.style.display = "block";
+        }
+
+        setCloseBtn.onclick = function() {
+            setOnCallModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == setOnCallModal) {
+                setOnCallModal.style.display = "none";
+            }
+        }
+
+        setOnCallForm.onsubmit = function(event) {
+            event.preventDefault();
+            const primary = document.getElementById('primary').value;
+            const secondary = document.getElementById('secondary').value;
+            const backup = document.getElementById('backup').value;
+            const specialist = document.getElementById('specialist').value;
+            const resident = document.getElementById('resident').value;
+
+            const onCallList = document.querySelector('.on-call-list');
+            onCallList.innerHTML = `
+                <p><strong>Primary:</strong> ${primary}</p>
+                <p><strong>Secondary:</strong> ${secondary}</p>
+                <p><strong>Backup:</strong> ${backup}</p>
+                <p><strong>Specialist:</strong> ${specialist}</p>
+                <p><strong>Resident:</strong> ${resident}</p>
+            `;
+
+            setOnCallModal.style.display = "none";
+            setOnCallForm.reset();
+        }
+
+        // Handle dashboard buttons with MVP functionality
+        document.querySelectorAll('.dashboard-card button').forEach(button => {
+            button.onclick = function() {
+                const action = button.textContent.trim();
+                switch (action) {
+                    case 'Review':
+                        // Simulate opening a modal to review pending requests
+                        alert('Opening review modal for pending requests...');
+                        break;
+                    case 'Resolve':
+                        // Simulate resolving coverage gaps
+                        alert('Resolving coverage gaps...');
+                        break;
+                    default:
+                        alert(`Action not implemented: ${action}`);
+                }
+            }
+        });
+
+        // Handle quick actions with MVP functionality
+        document.querySelectorAll('.quick-actions button').forEach(button => {
+            button.onclick = function() {
+                const action = button.textContent.trim();
+                switch (action) {
+                    case 'Add Provider':
+                        // Simulate opening the add provider modal
+                        document.getElementById('add-provider-modal').style.display = 'block';
+                        break;
+                    case 'Schedule Shift':
+                        // Simulate opening the create schedule modal
+                        document.getElementById('create-schedule-modal').style.display = 'block';
+                        break;
+                    case 'Swap Request':
+                        // Simulate opening a modal for swap requests
+                        alert('Opening swap request modal...');
+                        break;
+                    default:
+                        alert(`Quick action not implemented: ${action}`);
+                }
+            }
+        });
+
+        // Simulate loading report data
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('provider-coverage').textContent = '85% coverage this month';
+            document.getElementById('on-call-hours').textContent = 'Average 40 hours per provider';
+            document.getElementById('schedule-compliance').textContent = '98% compliant this month';
+            document.getElementById('time-off-trends').textContent = 'Increase in requests by 15%';
+        });
+    </script>
+</body>
+</html> 

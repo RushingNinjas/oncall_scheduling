@@ -1,0 +1,304 @@
+{
+  "providers": [
+    {
+      "id": 1,
+      "name": "Dr. John Smith",
+      "role": "Attending Physician",
+      "department": "Cardiology",
+      "specialties": ["Interventional Cardiology", "Nuclear Cardiology"],
+      "certifications": ["Board Certified - Cardiovascular Disease", "ACLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Dr. Sarah Johnson",
+      "role": "Chief of Oncology",
+      "department": "Oncology",
+      "specialties": ["Medical Oncology", "Hematology"],
+      "certifications": ["Board Certified - Medical Oncology", "Board Certified - Hematology"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Dr. Michael Chen",
+      "role": "Attending Physician",
+      "department": "Neurology",
+      "specialties": ["Neurosurgery", "Spine Surgery"],
+      "certifications": ["Board Certified - Neurological Surgery", "ACLS"],
+      "availability": ["Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "Dr. Emily Rodriguez",
+      "role": "Resident PGY-3",
+      "department": "Internal Medicine",
+      "specialties": ["Internal Medicine"],
+      "certifications": ["ACLS", "BLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Dr. David Kim",
+      "role": "Fellow",
+      "department": "Cardiology",
+      "specialties": ["Cardiology", "Internal Medicine"],
+      "certifications": ["Board Certified - Internal Medicine", "ACLS"],
+      "availability": ["Wednesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "name": "Amanda Thompson, RN",
+      "role": "Registered Nurse",
+      "department": "Emergency Medicine",
+      "specialties": ["Emergency Nursing", "Trauma Care"],
+      "certifications": ["RN", "ACLS", "PALS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "name": "Dr. James Wilson",
+      "role": "Chief of Emergency Medicine",
+      "department": "Emergency Medicine",
+      "specialties": ["Emergency Medicine", "Trauma"],
+      "certifications": ["Board Certified - Emergency Medicine", "ACLS"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "name": "Dr. Lisa Patel",
+      "role": "Attending Physician",
+      "department": "Pediatrics",
+      "specialties": ["General Pediatrics", "Pediatric Emergency Medicine"],
+      "certifications": ["Board Certified - Pediatrics", "PALS"],
+      "availability": ["Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 9,
+      "name": "Robert Martinez, PA-C",
+      "role": "Physician Assistant",
+      "department": "Orthopedics",
+      "specialties": ["Orthopedic Surgery", "Sports Medicine"],
+      "certifications": ["PA-C", "BLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 10,
+      "name": "Dr. Jennifer Lee",
+      "role": "Attending Physician",
+      "department": "Psychiatry",
+      "specialties": ["Adult Psychiatry", "Addiction Medicine"],
+      "certifications": ["Board Certified - Psychiatry"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 11,
+      "name": "Dr. Thomas Brown",
+      "role": "Resident PGY-1",
+      "department": "Surgery",
+      "specialties": ["General Surgery"],
+      "certifications": ["ACLS", "BLS"],
+      "availability": ["Monday", "Tuesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 12,
+      "name": "Sarah Williams, NP",
+      "role": "Nurse Practitioner",
+      "department": "Family Medicine",
+      "specialties": ["Family Practice", "Primary Care"],
+      "certifications": ["FNP-BC", "BLS"],
+      "availability": ["Tuesday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 13,
+      "name": "Dr. Richard Taylor",
+      "role": "Attending Physician",
+      "department": "Radiology",
+      "specialties": ["Diagnostic Radiology", "Interventional Radiology"],
+      "certifications": ["Board Certified - Radiology"],
+      "availability": ["Monday", "Wednesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 14,
+      "name": "Dr. Maria Garcia",
+      "role": "Fellow",
+      "department": "Oncology",
+      "specialties": ["Hematology-Oncology"],
+      "certifications": ["Board Certified - Internal Medicine", "ACLS"],
+      "availability": ["Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 15,
+      "name": "John Anderson, RN",
+      "role": "Charge Nurse",
+      "department": "ICU",
+      "specialties": ["Critical Care", "Emergency Nursing"],
+      "certifications": ["RN", "CCRN", "ACLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 16,
+      "name": "Dr. Rachel Green",
+      "role": "Attending Physician",
+      "department": "Dermatology",
+      "specialties": ["Clinical Dermatology", "Cosmetic Dermatology"],
+      "certifications": ["Board Certified - Dermatology", "ACLS"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 17,
+      "name": "Dr. Hassan Ahmed",
+      "role": "Resident PGY-4",
+      "department": "Orthopedics",
+      "specialties": ["Orthopedic Surgery", "Sports Medicine"],
+      "certifications": ["ACLS", "BLS"],
+      "availability": ["Monday", "Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 18,
+      "name": "Michelle Wong, CRNA",
+      "role": "Nurse Anesthetist",
+      "department": "Anesthesiology",
+      "specialties": ["Nurse Anesthesia", "Pain Management"],
+      "certifications": ["CRNA", "ACLS", "BLS"],
+      "availability": ["Tuesday", "Wednesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 19,
+      "name": "Dr. Benjamin Foster",
+      "role": "Chief of Neurology",
+      "department": "Neurology",
+      "specialties": ["Neurology", "Stroke Care"],
+      "certifications": ["Board Certified - Neurology", "ACLS"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 20,
+      "name": "Emma Thompson, PA-C",
+      "role": "Physician Assistant",
+      "department": "Emergency Medicine",
+      "specialties": ["Emergency Medicine", "Urgent Care"],
+      "certifications": ["PA-C", "ACLS", "BLS"],
+      "availability": ["Thursday", "Friday", "Saturday"],
+      "status": "Active"
+    },
+    {
+      "id": 21,
+      "name": "Dr. Alexander Wright",
+      "role": "Fellow",
+      "department": "Pulmonology",
+      "specialties": ["Pulmonary Disease", "Critical Care"],
+      "certifications": ["Board Certified - Internal Medicine", "ACLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 22,
+      "name": "Sofia Martinez, RN",
+      "role": "Clinical Nurse Specialist",
+      "department": "Oncology",
+      "specialties": ["Oncology Nursing", "Pain Management"],
+      "certifications": ["RN", "OCN", "ACLS"],
+      "availability": ["Wednesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 23,
+      "name": "Dr. William Turner",
+      "role": "Attending Physician",
+      "department": "Gastroenterology",
+      "specialties": ["Gastroenterology", "Hepatology"],
+      "certifications": ["Board Certified - Gastroenterology", "ACLS"],
+      "availability": ["Monday", "Tuesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 24,
+      "name": "Dr. Victoria Chang",
+      "role": "Resident PGY-2",
+      "department": "Pediatrics",
+      "specialties": ["Pediatrics"],
+      "certifications": ["PALS", "BLS"],
+      "availability": ["Tuesday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 25,
+      "name": "Daniel Roberts, NP",
+      "role": "Nurse Practitioner",
+      "department": "Cardiology",
+      "specialties": ["Cardiac Care", "Heart Failure Management"],
+      "certifications": ["FNP-BC", "ACLS", "BLS"],
+      "availability": ["Monday", "Wednesday", "Thursday"],
+      "status": "Active"
+    },
+    {
+      "id": 26,
+      "name": "Dr. Olivia Parker",
+      "role": "Attending Physician",
+      "department": "Endocrinology",
+      "specialties": ["Endocrinology", "Diabetes Care"],
+      "certifications": ["Board Certified - Endocrinology", "ACLS"],
+      "availability": ["Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 27,
+      "name": "Christopher Lee, RN",
+      "role": "Registered Nurse",
+      "department": "Surgery",
+      "specialties": ["Surgical Nursing", "Post-operative Care"],
+      "certifications": ["RN", "CNOR", "BLS"],
+      "availability": ["Monday", "Tuesday", "Wednesday"],
+      "status": "Active"
+    },
+    {
+      "id": 28,
+      "name": "Dr. Sophia Anderson",
+      "role": "Fellow",
+      "department": "Rheumatology",
+      "specialties": ["Rheumatology", "Autoimmune Disorders"],
+      "certifications": ["Board Certified - Internal Medicine", "ACLS"],
+      "availability": ["Wednesday", "Thursday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 29,
+      "name": "Dr. Marcus Johnson",
+      "role": "Chief of Surgery",
+      "department": "Surgery",
+      "specialties": ["General Surgery", "Minimally Invasive Surgery"],
+      "certifications": ["Board Certified - Surgery", "ACLS"],
+      "availability": ["Monday", "Wednesday", "Friday"],
+      "status": "Active"
+    },
+    {
+      "id": 30,
+      "name": "Lauren Miller, PA-C",
+      "role": "Physician Assistant",
+      "department": "Internal Medicine",
+      "specialties": ["Primary Care", "Preventive Medicine"],
+      "certifications": ["PA-C", "BLS"],
+      "availability": ["Tuesday", "Thursday", "Friday"],
+      "status": "Active"
+    }
+  ]
+} 
